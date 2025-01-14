@@ -3,3 +3,6 @@ google-api-python-client
 google_auth_oauthlib
 openpyxl
 python-dotenv
+wordcloud
+PyQt5
+seaborn
