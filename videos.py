@@ -54,12 +54,16 @@ def get_video_details(video_id):
     # Extract keywords from the description using regex (if any)
     description = snippet.get('description', '')
     keywords = re.findall(r"#\w+", description)
+    
+    # Get the tags (keywords) from the video
+    tags = snippet.get('tags', [])
 
     return {
         'Video ID': video_id,
         'Title': snippet.get('title'),
         'Description': description,
         'Keywords': ', '.join(keywords),
+        'Tags (Keywords)': ', '.join(tags),
         'View Count': stats.get('viewCount', 0),
         'Like Count': stats.get('likeCount', 0),
         'Comments Count': stats.get('commentCount', 0),
