@@ -1,3 +1,4 @@
+from datetime import datetime
 from googleapiclient.discovery import build
 from dotenv import load_dotenv
 import pandas as pd
@@ -89,9 +90,13 @@ def get_video_category_name(category_id):
         return category_response['items'][0]['snippet']['title']
     return "Unknown"
 
-def save_to_csv(video_data, filename='data/channel_videos.csv'):
+def save_to_csv(video_data):
     df = pd.DataFrame(video_data)
-    df.to_csv(filename, index=False, encoding='utf-8-sig')
+    file_path = f"data/{CHANNEL_ID}"
+    if not os.path.exists(file_path):
+        os.makedirs(file_path)
+        filename=f'{file_path}/videos-{str(datetime.now())}.csv'
+        df.to_csv(filename, index=False, encoding='utf-8-sig')
 
 if __name__ == '__main__':
     video_data = get_channel_videos(CHANNEL_ID)
